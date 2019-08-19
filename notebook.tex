@@ -1,0 +1,1021 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{explore\_cars}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Table of content
+
+Data analysis
+
+Proposed scoring model
+
+Critics and future ideas
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{config} IPCompleter.greedy=True
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{missingno} \PY{k}{as} \PY{n+nn}{mn}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{glob}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{score\PYZus{}base} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mf}{0.01}
+        \PY{n}{weights} \PY{o}{=} \PY{p}{\PYZob{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{others}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{0.1}\PY{p}{\PYZcb{}}
+        
+        \PY{k}{def} \PY{n+nf}{read\PYZus{}request\PYZus{}data}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{request\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/search\PYZus{}requests.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{low\PYZus{}memory}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{N}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SEARCH\PYZus{}TIMESTAMP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SEARCH\PYZus{}TIMESTAMP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{datetime64}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SEARCH\PYZus{}DURATION\PYZus{}IN\PYZus{}DAYS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SEARCH\PYZus{}DURATION\PYZus{}IN\PYZus{}DAYS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}OPEN\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}OPEN\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}INSTANT\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}INSTANT\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}CITY\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}CITY\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}FAMILY\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}FAMILY\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}COMMERCIAL\PYZus{}VAN\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}COMMERCIAL\PYZus{}VAN\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}SEDAN\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}NB\PYZus{}SEDAN\PYZus{}BOOKINGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}AVG\PYZus{}BOOKING\PYZus{}PRICE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}AVG\PYZus{}BOOKING\PYZus{}PRICE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}AVG\PYZus{}BOOKING\PYZus{}DURATION}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USER\PYZus{}AVG\PYZus{}BOOKING\PYZus{}DURATION}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FILTER\PYZus{}PRICE\PYZus{}MAX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{request\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FILTER\PYZus{}PRICE\PYZus{}MAX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{float}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}request\PYZus{}data.FILTER\PYZus{}TRANSMISSION.replace(\PYZob{}\PYZdq{}[\PYZbs{}\PYZdq{}automatic\PYZbs{}\PYZdq{}]\PYZdq{}: \PYZdq{}automatic\PYZdq{}\PYZcb{}, inplace=True)}
+            \PY{k}{return} \PY{n}{request\PYZus{}data}
+        
+        \PY{k}{def} \PY{n+nf}{read\PYZus{}cars\PYZus{}data}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{path} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./Data/impressions/}\PY{l+s+s1}{\PYZsq{}} 
+            \PY{n}{all\PYZus{}files} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{n}{path} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/*.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{li} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{filename} \PY{o+ow}{in} \PY{n}{all\PYZus{}files}\PY{p}{:}
+                \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{low\PYZus{}memory}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+                \PY{n}{li}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+            \PY{n}{cars\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{li}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{CAR\PYZus{}OWNER\PYZus{}PRR}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{N}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{0.5}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{k}{return} \PY{n}{cars\PYZus{}data}
+        
+        \PY{k}{def} \PY{n+nf}{generate\PYZus{}reduced\PYZus{}data}\PY{p}{(}\PY{n}{request\PYZus{}id}\PY{p}{,} \PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{SEARCH\PYZus{}REQUEST\PYZus{}ID} \PY{o}{==} \PY{n}{request\PYZus{}id}\PY{p}{]}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}distance\PYZus{}score}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{car\PYZus{}id}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}distance score:}
+            \PY{n}{column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}DISTANCE\PYZus{}TO\PYZus{}SEARCH\PYZus{}ADDRESS}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{max\PYZus{}value} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+            \PY{n}{min\PYZus{}value} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+            \PY{n}{x\PYZus{}value} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{car\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{factor\PYZus{}2} \PY{o}{=} \PY{n}{max\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}value}
+            \PY{k}{if} \PY{n}{factor\PYZus{}2} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{return} \PY{n}{score\PYZus{}base} \PY{o}{/} \PY{p}{(}\PY{p}{(}\PY{n}{max\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}value}\PY{p}{)} \PY{o}{/} \PY{n}{factor\PYZus{}2}\PY{p}{)} \PY{o}{+} \PY{n}{epsilon}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{epsilon}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}owner\PYZus{}prr}\PY{p}{(}\PY{n}{cars\PYZus{}data}\PY{p}{,} \PY{n}{car\PYZus{}id}\PY{p}{)}\PY{p}{:}
+            \PY{n}{column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}OWNER\PYZus{}PRR}\PY{l+s+s1}{\PYZsq{}}
+            \PY{k}{return} \PY{n+nb}{float}\PY{p}{(}\PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cars\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{car\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{epsilon}
+            
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}price\PYZus{}score}\PY{p}{(}\PY{n}{cars\PYZus{}data}\PY{p}{,} \PY{n}{car\PYZus{}id}\PY{p}{)}\PY{p}{:}
+            \PY{n}{column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}SEARCH\PYZus{}PRICE}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{max\PYZus{}value} \PY{o}{=} \PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cars\PYZus{}data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+            \PY{n}{min\PYZus{}value} \PY{o}{=} \PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cars\PYZus{}data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+            \PY{n}{x\PYZus{}value} \PY{o}{=} \PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cars\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{car\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{factor\PYZus{}2} \PY{o}{=} \PY{n}{max\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}value}
+            \PY{k}{if} \PY{n}{factor\PYZus{}2} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{return} \PY{n}{score\PYZus{}base} \PY{o}{/} \PY{p}{(}\PY{p}{(}\PY{n}{max\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}value}\PY{p}{)} \PY{o}{/} \PY{n}{factor\PYZus{}2}\PY{p}{)} \PY{o}{+} \PY{n}{epsilon}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{epsilon}
+            
+            
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}price\PYZus{}bonus\PYZus{}score}\PY{p}{(}\PY{n}{requests\PYZus{}data}\PY{p}{,} \PY{n}{cars\PYZus{}data}\PY{p}{,} \PY{n}{car\PYZus{}id}\PY{p}{)}\PY{p}{:}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{usr\PYZus{}avg\PYZus{}price} \PY{o}{=} \PY{n}{requests\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{USER\PYZus{}AVG\PYZus{}BOOKING\PYZus{}PRICE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{n}{usr\PYZus{}avg\PYZus{}duration} \PY{o}{=} \PY{n}{requests\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{USER\PYZus{}AVG\PYZus{}BOOKING\PYZus{}DURATION}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{k}{if} \PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{usr\PYZus{}avg\PYZus{}price}\PY{p}{)} \PY{o+ow}{is} \PY{n+nb}{str} \PY{o+ow}{or} \PY{o+ow}{not} \PY{n}{math}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{usr\PYZus{}avg\PYZus{}price}\PY{p}{)}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{usr\PYZus{}avg\PYZus{}duration}\PY{p}{)} \PY{o+ow}{is} \PY{n+nb}{str} \PY{o+ow}{or} \PY{o+ow}{not} \PY{n}{math}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{usr\PYZus{}avg\PYZus{}duration}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}SEARCH\PYZus{}PRICE}\PY{l+s+s1}{\PYZsq{}}
+                    \PY{n}{usr\PYZus{}avg\PYZus{}price} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{usr\PYZus{}avg\PYZus{}price}\PY{p}{)}
+                    \PY{n}{usr\PYZus{}avg\PYZus{}duration} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{usr\PYZus{}avg\PYZus{}duration}\PY{p}{)}
+                    \PY{n}{current\PYZus{}duration} \PY{o}{=} \PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cars\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{car\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                    \PY{n}{estimated\PYZus{}price} \PY{o}{=} \PY{p}{(}\PY{n}{usr\PYZus{}avg\PYZus{}price}\PY{o}{/}\PY{n}{usr\PYZus{}avg\PYZus{}duration}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{requests\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}DURATION\PYZus{}IN\PYZus{}DAYS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}print(\PYZdq{}estimated\PYZus{}price \PYZdq{},estimated\PYZus{}price)}
+                    \PY{n}{min\PYZus{}proposed\PYZus{}price} \PY{o}{=} \PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cars\PYZus{}data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+                    \PY{c+c1}{\PYZsh{}print(\PYZdq{}min \PYZdq{},min\PYZus{}proposed\PYZus{}price)}
+                    \PY{n}{max\PYZus{}proposed\PYZus{}price} \PY{o}{=} \PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cars\PYZus{}data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+                    \PY{c+c1}{\PYZsh{}print(\PYZdq{}max \PYZdq{},max\PYZus{}proposed\PYZus{}price)}
+                    \PY{n}{current\PYZus{}car\PYZus{}price} \PY{o}{=} \PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cars\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{car\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                    \PY{c+c1}{\PYZsh{}print(\PYZdq{}x \PYZdq{},current\PYZus{}car\PYZus{}price)}
+                    \PY{k}{if} \PY{n}{current\PYZus{}car\PYZus{}price} \PY{o}{\PYZgt{}} \PY{n}{estimated\PYZus{}price}\PY{p}{:}
+                        \PY{k}{return} \PY{l+m+mi}{0}
+                        
+                    \PY{n}{factor\PYZus{}2} \PY{o}{=} \PY{n}{estimated\PYZus{}price} \PY{o}{\PYZhy{}} \PY{n}{current\PYZus{}car\PYZus{}price}
+                    \PY{k}{if} \PY{n}{factor\PYZus{}2} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{k}{return} \PY{n}{score\PYZus{}base} \PY{o}{/} \PY{p}{(}\PY{p}{(}\PY{n}{estimated\PYZus{}price} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}proposed\PYZus{}price}\PY{p}{)} \PY{o}{/} \PY{n}{factor\PYZus{}2}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{return} \PY{l+m+mi}{0}
+                        
+            \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:} 
+                \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{e}\PY{p}{)}\PY{p}{)}
+                \PY{k}{return} \PY{l+m+mi}{0}
+            
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}price\PYZus{}extra\PYZus{}score}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{car\PYZus{}id}\PY{p}{)}\PY{p}{:}
+            \PY{n}{column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}PRICE\PYZus{}EXTRA\PYZus{}KM}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{max\PYZus{}value} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+            \PY{n}{min\PYZus{}value} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+            \PY{n}{x\PYZus{}value} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{car\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{factor\PYZus{}2} \PY{o}{=} \PY{n}{max\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}value}
+            \PY{k}{if} \PY{n}{factor\PYZus{}2} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{return} \PY{n}{score\PYZus{}base} \PY{o}{/} \PY{p}{(}\PY{p}{(}\PY{n}{max\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}value}\PY{p}{)} \PY{o}{/} \PY{n}{factor\PYZus{}2}\PY{p}{)} \PY{o}{+} \PY{n}{epsilon}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{epsilon}
+            
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}car\PYZus{}age\PYZus{}score}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{car\PYZus{}id}\PY{p}{)}\PY{p}{:}
+            \PY{n}{column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}RELEASE\PYZus{}YEAR}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{max\PYZus{}value} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+            \PY{n}{min\PYZus{}value} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+            \PY{n}{x\PYZus{}value} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{car\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{factor\PYZus{}2} \PY{o}{=} \PY{n}{x\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}value}
+            \PY{k}{if} \PY{n}{factor\PYZus{}2} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{return} \PY{n}{score\PYZus{}base} \PY{o}{/} \PY{p}{(}\PY{p}{(}\PY{n}{max\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}value}\PY{p}{)} \PY{o}{/} \PY{n}{factor\PYZus{}2}\PY{p}{)} \PY{o}{+} \PY{n}{epsilon}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{epsilon}
+            
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}user\PYZus{}preferences}\PY{p}{(}\PY{n}{search\PYZus{}request\PYZus{}id}\PY{p}{,} \PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{result} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+                \PY{n}{nb\PYZus{}all\PYZus{}bookings} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{USER\PYZus{}NB\PYZus{}BOOKINGS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                \PY{n}{nb\PYZus{}open\PYZus{}bookings} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{USER\PYZus{}NB\PYZus{}OPEN\PYZus{}BOOKINGS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}    
+                \PY{n}{nb\PYZus{}instant\PYZus{}bookings} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{USER\PYZus{}NB\PYZus{}INSTANT\PYZus{}BOOKINGS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} 
+                \PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OPEN\PYZus{}TRUE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{nb\PYZus{}open\PYZus{}bookings} \PY{o}{/} \PY{n}{nb\PYZus{}all\PYZus{}bookings}
+                \PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OPEN\PYZus{}FALSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OPEN\PYZus{}TRUE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{INST\PYZus{}TRUE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{nb\PYZus{}instant\PYZus{}bookings} \PY{o}{/} \PY{n}{nb\PYZus{}all\PYZus{}bookings}
+                \PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{INST\PYZus{}FALSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{INST\PYZus{}TRUE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{k}{return} \PY{n}{result}
+            \PY{k}{except}\PY{p}{:}
+                \PY{k}{return} \PY{k+kc}{None}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}car\PYZus{}open\PYZus{}pref\PYZus{}score}\PY{p}{(}\PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{p}{,} \PY{n}{car\PYZus{}id}\PY{p}{,} \PY{n}{search\PYZus{}request\PYZus{}id}\PY{p}{,} \PY{n}{reduced\PYZus{}request\PYZus{}data}\PY{p}{)}\PY{p}{:}
+            \PY{n}{user\PYZus{}pref} \PY{o}{=} \PY{n}{get\PYZus{}user\PYZus{}preferences}\PY{p}{(}\PY{n}{search\PYZus{}request\PYZus{}id}\PY{p}{,} \PY{n}{reduced\PYZus{}request\PYZus{}data}\PY{p}{)}
+            \PY{k}{if} \PY{n}{user\PYZus{}pref}\PY{p}{:}
+                \PY{n}{data\PYZus{}row} \PY{o}{=} \PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{p}{[}\PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{o}{.}\PY{n}{CAR\PYZus{}ID} \PY{o}{==} \PY{n}{car\PYZus{}id}\PY{p}{]}
+                \PY{n}{current\PYZus{}car\PYZus{}open\PYZus{}specs} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}IS\PYZus{}OPEN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{k}{if} \PY{n}{current\PYZus{}car\PYZus{}open\PYZus{}specs}\PY{p}{:}
+                    \PY{n}{open\PYZus{}pref} \PY{o}{=} \PY{n}{user\PYZus{}pref}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OPEN\PYZus{}TRUE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{score\PYZus{}base} \PY{o}{+} \PY{n}{epsilon}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{open\PYZus{}pref} \PY{o}{=} \PY{n}{user\PYZus{}pref}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OPEN\PYZus{}FALSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{score\PYZus{}base} \PY{o}{+} \PY{n}{epsilon}
+                    
+                \PY{n}{current\PYZus{}car\PYZus{}inst\PYZus{}specs} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}INSTANT\PYZus{}BOOKABLE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{k}{if} \PY{n}{current\PYZus{}car\PYZus{}inst\PYZus{}specs}\PY{p}{:}
+                    \PY{n}{inst\PYZus{}pref} \PY{o}{=} \PY{n}{user\PYZus{}pref}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{INST\PYZus{}TRUE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*}  \PY{n}{score\PYZus{}base} \PY{o}{+} \PY{n}{epsilon}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{inst\PYZus{}pref} \PY{o}{=} \PY{n}{user\PYZus{}pref}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{INST\PYZus{}FALSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{score\PYZus{}base} \PY{o}{+} \PY{n}{epsilon}
+                
+                \PY{k}{return} \PY{p}{(}\PY{n}{open\PYZus{}pref}\PY{p}{,} \PY{n}{inst\PYZus{}pref}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}
+            
+                
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}score}\PY{p}{(}\PY{n}{search\PYZus{}request\PYZus{}id}\PY{p}{,} \PY{n}{cars\PYZus{}data}\PY{p}{,} \PY{n}{request\PYZus{}data}\PY{p}{)}\PY{p}{:}
+            \PY{n}{reduced\PYZus{}cars\PYZus{}data} \PY{o}{=} \PY{n}{generate\PYZus{}reduced\PYZus{}data}\PY{p}{(}\PY{n}{search\PYZus{}request\PYZus{}id}\PY{p}{,} \PY{n}{cars\PYZus{}data}\PY{p}{)}
+            \PY{n}{reduced\PYZus{}request\PYZus{}data} \PY{o}{=} \PY{n}{generate\PYZus{}reduced\PYZus{}data}\PY{p}{(}\PY{n}{search\PYZus{}request\PYZus{}id}\PY{p}{,} \PY{n}{request\PYZus{}data}\PY{p}{)}
+            \PY{n}{list\PYZus{}of\PYZus{}cars} \PY{o}{=} \PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{o}{.}\PY{n}{CAR\PYZus{}ID}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+            \PY{n}{cars\PYZus{}scores} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{car} \PY{o+ow}{in} \PY{n}{list\PYZus{}of\PYZus{}cars}\PY{p}{:}
+                
+                \PY{n}{all\PYZus{}scores} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                \PY{n}{all\PYZus{}scores} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{all\PYZus{}scores}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{others}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*} \PY{n}{get\PYZus{}car\PYZus{}age\PYZus{}score}\PY{p}{(}\PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{p}{,}\PY{n}{car}\PY{p}{)}\PY{p}{)}
+                \PY{n}{all\PYZus{}scores} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{all\PYZus{}scores}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{get\PYZus{}price\PYZus{}score}\PY{p}{(}\PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{p}{,}\PY{n}{car}\PY{p}{)} \PY{o}{+} \PY{n}{get\PYZus{}price\PYZus{}extra\PYZus{}score}\PY{p}{(}\PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{p}{,}\PY{n}{car}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{get\PYZus{}price\PYZus{}bonus\PYZus{}score}\PY{p}{(}\PY{n}{reduced\PYZus{}request\PYZus{}data}\PY{p}{,} \PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{p}{,} \PY{n}{car}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}    
+                \PY{n}{all\PYZus{}scores} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{all\PYZus{}scores}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{n}{get\PYZus{}distance\PYZus{}score}\PY{p}{(}\PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{p}{,}\PY{n}{car}\PY{p}{)}\PY{p}{)}   
+                
+                \PY{n}{open\PYZus{}pref}\PY{p}{,} \PY{n}{inst\PYZus{}pref} \PY{o}{=} \PY{n}{get\PYZus{}car\PYZus{}open\PYZus{}pref\PYZus{}score}\PY{p}{(}\PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{p}{,} \PY{n}{car}\PY{p}{,} \PY{n}{search\PYZus{}request\PYZus{}id}\PY{p}{,} \PY{n}{reduced\PYZus{}request\PYZus{}data}\PY{p}{)}
+                \PY{k}{if} \PY{n}{open\PYZus{}pref} \PY{o+ow}{and} \PY{n}{inst\PYZus{}pref}\PY{p}{:}
+                    \PY{n}{all\PYZus{}scores} \PY{o}{=}  \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{all\PYZus{}scores}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{others}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{open\PYZus{}pref}\PY{p}{)}
+                    \PY{n}{all\PYZus{}scores} \PY{o}{=}  \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{all\PYZus{}scores}\PY{p}{,} \PY{n}{weights}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{others}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{n}{inst\PYZus{}pref}\PY{p}{)}
+                \PY{n}{prr} \PY{o}{=} \PY{n}{get\PYZus{}owner\PYZus{}prr}\PY{p}{(}\PY{n}{reduced\PYZus{}cars\PYZus{}data}\PY{p}{,}\PY{n}{car}\PY{p}{)}    
+                \PY{c+c1}{\PYZsh{}print(car + \PYZdq{}:\PYZdq{}+ str(np.mean(all\PYZus{}scores)))}
+                \PY{n}{mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{all\PYZus{}scores}\PY{p}{)}
+                \PY{n}{mean} \PY{o}{*}\PY{o}{=} \PY{n}{prr}
+                \PY{n}{cars\PYZus{}scores}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mean}\PY{p}{)}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{        all\PYZus{}scores = 1.0}
+        \PY{l+s+sd}{        all\PYZus{}scores *= get\PYZus{}car\PYZus{}age\PYZus{}score(reduced\PYZus{}cars\PYZus{}data,car)}
+        \PY{l+s+sd}{        \PYZsh{}all\PYZus{}scores *= (get\PYZus{}price\PYZus{}extra\PYZus{}score(reduced\PYZus{}cars\PYZus{}data,car)}
+        \PY{l+s+sd}{        all\PYZus{}scores *= get\PYZus{}distance\PYZus{}score(reduced\PYZus{}cars\PYZus{}data,car)}
+        \PY{l+s+sd}{        all\PYZus{}scores *= (get\PYZus{}price\PYZus{}score(reduced\PYZus{}cars\PYZus{}data,car) + get\PYZus{}price\PYZus{}extra\PYZus{}score(reduced\PYZus{}cars\PYZus{}data,car)) + get\PYZus{}price\PYZus{}bonus\PYZus{}score(reduced\PYZus{}request\PYZus{}data, reduced\PYZus{}cars\PYZus{}data, car)/3}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        open\PYZus{}pref, inst\PYZus{}pref = get\PYZus{}car\PYZus{}open\PYZus{}pref\PYZus{}score(reduced\PYZus{}cars\PYZus{}data, car, search\PYZus{}request\PYZus{}id, reduced\PYZus{}request\PYZus{}data)}
+        \PY{l+s+sd}{        if open\PYZus{}pref and inst\PYZus{}pref:}
+        \PY{l+s+sd}{            all\PYZus{}scores *= open\PYZus{}pref}
+        \PY{l+s+sd}{            all\PYZus{}scores *=  inst\PYZus{}pref}
+        \PY{l+s+sd}{        prr = get\PYZus{}owner\PYZus{}prr(reduced\PYZus{}cars\PYZus{}data,car) }
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        all\PYZus{}scores *= prr}
+        \PY{l+s+sd}{        cars\PYZus{}scores.append(all\PYZus{}scores)}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{list\PYZus{}of\PYZus{}cars}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}SCORE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cars\PYZus{}scores}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{create\PYZus{}average\PYZus{}price\PYZus{}feature}\PY{p}{(}\PY{n}{requests\PYZus{}data}\PY{p}{,} \PY{n}{cars\PYZus{}data}\PY{p}{,} \PY{n}{request\PYZus{}id}\PY{p}{)}\PY{p}{:}
+            \PY{n}{duration} \PY{o}{=} \PY{n}{requests\PYZus{}data}\PY{p}{[}\PY{n}{requests\PYZus{}data}\PY{o}{.}\PY{n}{SEARCH\PYZus{}REQUEST\PYZus{}ID} \PY{o}{==} \PY{n}{request\PYZus{}id}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}DURATION\PYZus{}IN\PYZus{}DAYS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{list\PYZus{}of\PYZus{}cars} \PY{o}{=} \PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{CAR\PYZus{}ID}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+            \PY{n}{cars\PYZus{}scores}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{car} \PY{o+ow}{in} \PY{n}{list\PYZus{}of\PYZus{}cars}\PY{p}{:}
+                \PY{k}{if} \PY{n}{duration} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{avg\PYZus{}price} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{cars\PYZus{}data}\PY{p}{[}\PY{n}{cars\PYZus{}data}\PY{o}{.}\PY{n}{CAR\PYZus{}ID} \PY{o}{==} \PY{n}{car}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}SEARCH\PYZus{}PRICE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{duration}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{avg\PYZus{}price} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{cars\PYZus{}scores}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{avg\PYZus{}price}\PY{p}{)}
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{list\PYZus{}of\PYZus{}cars}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}AVERAGE\PYZus{}PRICE\PYZus{}PER\PYZus{}DAY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cars\PYZus{}scores}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Data Analysis
+
+ \#\#\#\#\# Read Data PS: Each ``Impression'' file contains chunk of
+data, so let's combine them all together
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{cars\PYZus{}full\PYZus{}data} \PY{o}{=} \PY{n}{read\PYZus{}cars\PYZus{}data}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{request\PYZus{}full\PYZus{}data} \PY{o}{=} \PY{n}{read\PYZus{}request\PYZus{}data}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Sakher\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}core\textbackslash{}internals.py:3462: FutureWarning: Passing in 'datetime64' dtype with no frequency is deprecated and will raise in a future version. Please pass in 'datetime64[ns]' instead.
+  return self.apply('astype', dtype=dtype, **kwargs)
+
+    \end{Verbatim}
+
+    \hypertarget{univariate-analysis}{%
+\subparagraph{Univariate analysis}\label{univariate-analysis}}
+
+First, let's do some Univariate analysis on the data, this give us a
+clear idea on data types and its distribution. For the following i'll be
+using only REQUESTS data, the same thing can be applied for IMPRESSIONS
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{request\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}                   SEARCH\_REQUEST\_ID        SEARCH\_TIMESTAMP SEARCH\_START\_DATE  \textbackslash{}
+        0  d36fa4f327dc6a5bf3b3a072ac659122 2019-02-15 14:36:42.429        2019-02-16   
+        1  eaee1f2112d382f4a2b1a45e65c898ce 2019-02-10 17:15:40.212        2019-07-03   
+        2  0f17c8881ef42f7630cb3b5b0846b7f0 2019-01-05 11:15:41.537        2019-01-05   
+        3  972811ca6b25fd3b5195c8e92d879bf9 2019-03-07 18:18:04.798        2019-04-13   
+        4  4dc66b2fde9fc3dde5e868a187677421 2019-01-18 10:57:08.443        2019-02-02   
+        
+          SEARCH\_START\_TIME SEARCH\_END\_DATE SEARCH\_END\_TIME  SEARCH\_DURATION\_IN\_DAYS  \textbackslash{}
+        0             09:00      2019-02-17           18:00                        2   
+        1             09:30      2019-07-07           17:30                        5   
+        2             15:00      2019-01-05           19:30                        1   
+        3             08:00      2019-04-14           15:00                        2   
+        4             09:00      2019-02-03           09:00                        1   
+        
+          SEARCH\_LATITUDE SEARCH\_LONGITUDE  SEARCH\_POSTAL\_CODE SEARCH\_COUNTRY  \textbackslash{}
+        0              49              2.2               95150             FR   
+        1           48.12            16.55                1300             AT   
+        2            48.9             2.39               93500             FR   
+        3           48.52             2.65               77000             FR   
+        4           48.54             2.65               94190             FR   
+        
+          SEARCH\_PAGE FILTER\_SEATS\_MIN FILTER\_TRANSMISSION FILTER\_AGE\_MAX FILTER\_OPEN  \textbackslash{}
+        0           1              NaN                 NaN            NaN         NaN   
+        1         NaN              NaN                 NaN            NaN         NaN   
+        2         NaN              NaN                 NaN            NaN         NaN   
+        3         NaN              NaN                 NaN            NaN         NaN   
+        4           2              NaN                 NaN            NaN         NaN   
+        
+          FILTER\_INSTANT\_BOOKABLE FILTER\_CAR\_TYPE\_CITY FILTER\_CAR\_TYPE\_SEDAN  \textbackslash{}
+        0                     NaN                  NaN                   NaN   
+        1                     NaN                  NaN                   NaN   
+        2                     NaN                    1                     1   
+        3                     NaN                  NaN                   NaN   
+        4                     NaN                  NaN                     1   
+        
+          FILTER\_CAR\_TYPE\_FAMILY FILTER\_CAR\_TYPE\_COMMERCIAL\_VAN  FILTER\_PRICE\_MAX  \textbackslash{}
+        0                    NaN                              1               NaN   
+        1                      1                            NaN               NaN   
+        2                      1                              1              35.0   
+        3                    NaN                              1               NaN   
+        4                    NaN                            NaN               NaN   
+        
+           USER\_NB\_BOOKINGS  USER\_NB\_OPEN\_BOOKINGS  USER\_NB\_INSTANT\_BOOKINGS  \textbackslash{}
+        0               0.0                    0.0                       0.0   
+        1               NaN                    NaN                       NaN   
+        2               1.0                    0.0                       0.0   
+        3               NaN                    NaN                       NaN   
+        4               NaN                    NaN                       NaN   
+        
+           USER\_NB\_CITY\_BOOKINGS  USER\_NB\_COMMERCIAL\_VAN\_BOOKINGS  \textbackslash{}
+        0                    0.0                              0.0   
+        1                    NaN                              NaN   
+        2                    1.0                              0.0   
+        3                    NaN                              NaN   
+        4                    NaN                              NaN   
+        
+           USER\_NB\_FAMILY\_BOOKINGS  USER\_NB\_SEDAN\_BOOKINGS  USER\_AVG\_BOOKING\_PRICE  \textbackslash{}
+        0                      0.0                     0.0                     NaN   
+        1                      NaN                     NaN                     NaN   
+        2                      0.0                     0.0                   81.37   
+        3                      NaN                     NaN                     NaN   
+        4                      NaN                     NaN                     NaN   
+        
+           USER\_AVG\_BOOKING\_DURATION                         SEARCH\_ID  
+        0                        NaN  b6a389ab625d096adcfa388675d50461  
+        1                        NaN  48eccee60e7ab6a0cdf8bead9fe05b20  
+        2                        3.0  ad4e4012242e6124e22a48dfa2eefa28  
+        3                        NaN  5ec53be3a3c3b90b7e411d808cad8033  
+        4                        NaN  62d282dec5c533ac82e530464eea5c41  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{request\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}        SEARCH\_DURATION\_IN\_DAYS  SEARCH\_POSTAL\_CODE  FILTER\_PRICE\_MAX  \textbackslash{}
+        count            575341.000000       575341.000000      81515.000000   
+        mean                  4.083644        60557.882014        149.865117   
+        std                   5.402171        33137.163690        153.899435   
+        min                   1.000000         1000.000000         10.000000   
+        25\%                   1.000000        28045.000000         55.000000   
+        50\%                   2.000000        75012.000000        100.000000   
+        75\%                   4.000000        92140.000000        185.000000   
+        max                 105.000000        95880.000000       1595.000000   
+        
+               USER\_NB\_BOOKINGS  USER\_NB\_OPEN\_BOOKINGS  USER\_NB\_INSTANT\_BOOKINGS  \textbackslash{}
+        count     270590.000000          270590.000000             270590.000000   
+        mean           4.394198               2.160420                  2.451683   
+        std            9.132583               5.478369                  5.657937   
+        min            0.000000               0.000000                  0.000000   
+        25\%            0.000000               0.000000                  0.000000   
+        50\%            1.000000               0.000000                  0.000000   
+        75\%            5.000000               2.000000                  2.000000   
+        max          222.000000             123.000000                116.000000   
+        
+               USER\_NB\_CITY\_BOOKINGS  USER\_NB\_COMMERCIAL\_VAN\_BOOKINGS  \textbackslash{}
+        count          270590.000000                    270590.000000   
+        mean                2.970731                         0.499024   
+        std                 6.971009                         1.860435   
+        min                 0.000000                         0.000000   
+        25\%                 0.000000                         0.000000   
+        50\%                 1.000000                         0.000000   
+        75\%                 3.000000                         0.000000   
+        max               133.000000                        81.000000   
+        
+               USER\_NB\_FAMILY\_BOOKINGS  USER\_NB\_SEDAN\_BOOKINGS  \textbackslash{}
+        count            270590.000000           270590.000000   
+        mean                  0.455830                0.133933   
+        std                   1.632394                0.804639   
+        min                   0.000000                0.000000   
+        25\%                   0.000000                0.000000   
+        50\%                   0.000000                0.000000   
+        75\%                   0.000000                0.000000   
+        max                  40.000000               46.000000   
+        
+               USER\_AVG\_BOOKING\_PRICE  USER\_AVG\_BOOKING\_DURATION  
+        count           169410.000000              169410.000000  
+        mean               114.015729                   3.154191  
+        std                 94.209970                   3.341266  
+        min                  7.000000                   1.000000  
+        25\%                 59.000000                   1.333333  
+        50\%                 87.500000                   2.000000  
+        75\%                135.166667                   3.500000  
+        max               1676.000000                  30.000000  
+\end{Verbatim}
+            
+    At first glance, the data is full of missing values. Let's check which
+columns are effected
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{colms}\PY{o}{=}\PY{p}{[}\PY{n}{col} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{request\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{columns} \PY{k}{if} \PY{n}{request\PYZus{}full\PYZus{}data}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{colms}\PY{p}{)}
+        \PY{n}{mn}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{request\PYZus{}full\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['SEARCH\_LATITUDE', 'SEARCH\_LONGITUDE', 'SEARCH\_COUNTRY', 'SEARCH\_PAGE', 'FILTER\_SEATS\_MIN', 'FILTER\_TRANSMISSION', 'FILTER\_AGE\_MAX', 'FILTER\_OPEN', 'FILTER\_INSTANT\_BOOKABLE', 'FILTER\_CAR\_TYPE\_CITY', 'FILTER\_CAR\_TYPE\_SEDAN', 'FILTER\_CAR\_TYPE\_FAMILY', 'FILTER\_CAR\_TYPE\_COMMERCIAL\_VAN', 'FILTER\_PRICE\_MAX', 'USER\_NB\_BOOKINGS', 'USER\_NB\_OPEN\_BOOKINGS', 'USER\_NB\_INSTANT\_BOOKINGS', 'USER\_NB\_CITY\_BOOKINGS', 'USER\_NB\_COMMERCIAL\_VAN\_BOOKINGS', 'USER\_NB\_FAMILY\_BOOKINGS', 'USER\_NB\_SEDAN\_BOOKINGS', 'USER\_AVG\_BOOKING\_PRICE', 'USER\_AVG\_BOOKING\_DURATION']
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x2ce0d666eb8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The features effected by the missing values are either : FILTER featues,
+in which it understandable. FILTER features are used in order to
+pre-select the list of car candidates, for the sake of our objectif
+(scoring), let's drop the columns. The other features are USER related,
+we car `predict' missing values using KNN for example. For now, let's
+keep the same values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{columns\PYZus{}to\PYZus{}drop} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}LATITUDE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}LONGITUDE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}COUNTRY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}POSTAL\PYZus{}CODE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FILTER\PYZus{}SEATS\PYZus{}MIN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FILTER\PYZus{}TRANSMISSION}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FILTER\PYZus{}AGE\PYZus{}MAX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FILTER\PYZus{}OPEN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FILTER\PYZus{}INSTANT\PYZus{}BOOKABLE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FILTER\PYZus{}CAR\PYZus{}TYPE\PYZus{}CITY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FILTER\PYZus{}CAR\PYZus{}TYPE\PYZus{}SEDAN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FILTER\PYZus{}CAR\PYZus{}TYPE\PYZus{}FAMILY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FILTER\PYZus{}CAR\PYZus{}TYPE\PYZus{}COMMERCIAL\PYZus{}VAN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}PAGE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{request\PYZus{}full\PYZus{}data} \PY{o}{=} \PY{n}{request\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{columns\PYZus{}to\PYZus{}drop}\PY{p}{)}
+        \PY{n}{request\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{keep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{first}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n}{columns\PYZus{}to\PYZus{}drop} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BOOKED}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VISITED}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}LONGITUDE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}POSTAL\PYZus{}CODE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}LATITUDE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}TYPE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}TRANSMISSION}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}SEATS\PYZus{}COUNT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}DOORS\PYZus{}COUNT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ENERGY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SELECTED}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{cars\PYZus{}full\PYZus{}data} \PY{o}{=} \PY{n}{cars\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{columns\PYZus{}to\PYZus{}drop}\PY{p}{)}
+        \PY{n}{cars\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{keep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{first}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now that we're working with reduced dataset, let's continue our
+univariate analysis. This time by analysing the tendancies of car
+requests
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+        \PY{n}{request\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{SEARCH\PYZus{}REQUEST\PYZus{}ID}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{request\PYZus{}full\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}TIMESTAMP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{hour}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total requests}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+        \PY{n}{request\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{SEARCH\PYZus{}REQUEST\PYZus{}ID}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{request\PYZus{}full\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}TIMESTAMP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{weekday}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Week Day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total requests}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+        \PY{n}{request\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{SEARCH\PYZus{}REQUEST\PYZus{}ID}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{request\PYZus{}full\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SEARCH\PYZus{}TIMESTAMP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{month}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total requests}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} Text(0,0.5,'Total requests')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The graphs gives us a clear idea on the times tendencies of car
+requests. The information however (the way it is presented), is not
+usefull for scoring.
+
+\hypertarget{bivariate-analysis}{%
+\subparagraph{Bivariate analysis}\label{bivariate-analysis}}
+
+Let's proceed to bi-variate analysis, this time by trying to capture the
+correlation between feature on the IMPRESSIONS data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{corr} \PY{o}{=} \PY{n}{cars\PYZus{}full\PYZus{}data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+         \PY{n}{corr}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{background\PYZus{}gradient}\PY{p}{(}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coolwarm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} <pandas.io.formats.style.Styler at 0x2ce0d5c9f60>
+\end{Verbatim}
+            
+    \hypertarget{we-notice-the-following}{%
+\subparagraph{We notice the following:}\label{we-notice-the-following}}
+
+1- CAR\_RELEASE\_YEAR correlates positively with CAR\_CATEGORY
+
+2- CAR\_INSTANT\_BOOKABLE correlates positively with CAR\_IS\_OPEN
+
+    Proposed scoring model
+
+ To start our feature engineering, let's take a subset of data that
+represents only one request.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{request\PYZus{}id} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d3e6547a4eb9db6bb8939e922c3e8fb7}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{red\PYZus{}cars} \PY{o}{=}  \PY{n}{generate\PYZus{}reduced\PYZus{}data}\PY{p}{(}\PY{n}{request\PYZus{}id}\PY{p}{,} \PY{n}{cars\PYZus{}full\PYZus{}data}\PY{p}{)}
+         \PY{n}{red\PYZus{}reqs} \PY{o}{=}  \PY{n}{generate\PYZus{}reduced\PYZus{}data}\PY{p}{(}\PY{n}{request\PYZus{}id}\PY{p}{,} \PY{n}{request\PYZus{}full\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    Explaining the scoring system: From analysing the data, we notice a
+feature which represents the current ranking system based on current
+score. The task being not to replicate the current ranking, this system
+cannot be used as a ground-truth model. Any supervied models cannot be
+applied on this given column.
+
+The process i used in order to create my scoring model is by following
+these steps: - Ask colleagues and friends to rank based on the
+importance of factors in renting a car, these being : price, distance,
+The car model, car age - Try Drivy App in real life situations in order
+to analyse the current behaviour. - Check online (Kaggle, Quora mostly)
+for similar Problems/Models and analyse the proposed approach; a similar
+issue being `Renting an apartement for holidays'
+
+My proposed approch works as follow:
+
+Let \$ S(car\_id) \$ be a function that return a probablibity score
+between 0 and 1. Which is definied as follow :
+
+\[ S(car\_id) = ( \frac{1}{n} \sum_{\substack{   0<i<n  }} w_i * P(x_i) ) * R(car\_id)  \]
+
+For each feature \$x\_i \in \{car\_price, car\_distance, car\_age,
+user\_preference\_open, user\_preference\_inst \} \$
+
+Where :
+
+\$ w\_i \$ Weight of \(x_i\) that represents its importance
+
+\$ R(car\_id) \$ : the car's owner acceptance rate
+
+Let's dive deeper for each \(x_i\) :
+
+\textbf{1- Car price :} The probability of a car being selected based on
+price only is calculated based on three parameters:
+
+\$ P\_\{car\_price\_1\}(car\_id) \$ The car's price based on the
+request: with \(0+ \epsilon\) being the probability of choosing the car
+with the highest price, \(1\) for chosing the car with the lowest price
+
+\$ P\_\{car\_price\_2\}(car\_id) \$ The car's extra price : with
+\(0+ \epsilon\) being the probability of choosing the car with the
+highest price, \(1\) for chosing the car with the lowest price
+
+\$ P\_\{car\_price\_3\}(car\_id) \$ The current offer compared to the
+usual renting price by the user, with \(0+ \epsilon\) attributed to the
+offers that are either higher or equal to the usual renting price, \(1\)
+for the car with the best offer compared to the usual price
+
+The score is is calculated as follow:
+\[ P(x_i = car\_price) = \frac{1}{3} \sum_{\substack{   0<i<=3  }}  P_{car\_price_i}(car\_id)  \]
+
+\textbf{2- Car distance / Car age:} The probability of a car being
+selected based on distance only or age only is calculated as follow:
+\[ P(x_i = car\_distance) = 
+  \begin{cases}
+    0+ \epsilon       & \quad \text{Furthest / oldest car in the pool}\\
+    1       & \quad \text{Closest / newest car in the pool}
+  \end{cases}
+\]
+
+\textbf{3- User preferences:} This attribute is calculated as follow:
+
+Probability of the the car being selected based on its OPEN value, which
+is calculated as following
+
+\[ P(x_i = user\_pref\_open) = 
+  \begin{cases}
+    P(x_i / V(car\_opened)=true )       & \quad \text{If V(car_opened)=true : return pourcentage of opened car booked by the user}\\
+    1-P(x_i / V(car\_opened)=true )        & \quad \text{If V(car_opened)=false}
+  \end{cases}
+\]
+
+Probability of the the car being selected based on its INSTANT\_BOOKABLE
+value, which is calculated as following
+
+\[ P(x_i = user\_pref\_inst) = 
+  \begin{cases}
+    P(x_i / V(car\_inst)=true )       & \quad \text{If V(car_inst)=true : return pourcentage of intant bookable cars booked by the user}\\
+    1-P(x_i / V(car\_inst)=true )        & \quad \text{If V(car_inst)=false}
+  \end{cases}
+\]
+
+    Let's calculate the real price per day for each car for a specific
+request :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{create\PYZus{}average\PYZus{}price\PYZus{}feature}\PY{p}{(}\PY{n}{request\PYZus{}full\PYZus{}data}\PY{p}{,} \PY{n}{red\PYZus{}cars}\PY{p}{,} \PY{n}{request\PYZus{}id}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}    CAR\_AVERAGE\_PRICE\_PER\_DAY                            CAR\_ID
+         0                       44.0  81e2fc073cf49e74242cec3aca0b6b2a
+         1                       37.0  235680dd19c9ec7027e5b38d691421cb
+         2                       42.0  c27faba880257517dfbb1245ea6a20df
+         3                       41.0  2bf3bbef0b8c6dea16ba885722bc42e3
+         4                       45.0  09887f5a912217c0712cd1bfb58fc80c
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{red\PYZus{}cars}\PY{o}{.}\PY{n}{CAR\PYZus{}SEARCH\PYZus{}PRICE}\PY{o}{=}\PY{n}{red\PYZus{}cars}\PY{o}{.}\PY{n}{CAR\PYZus{}SEARCH\PYZus{}PRICE}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+         \PY{n}{ageplt}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{FacetGrid}\PY{p}{(}\PY{n}{red\PYZus{}cars}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}PRICE\PYZus{}EXTRA\PYZus{}KM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{aspect}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{ageplt}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{sns}\PY{o}{.}\PY{n}{kdeplot}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}SEARCH\PYZus{}PRICE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{shade}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ageplt}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlim}\PY{o}{=}\PY{p}{(}\PY{n}{red\PYZus{}cars}\PY{o}{.}\PY{n}{CAR\PYZus{}SEARCH\PYZus{}PRICE}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{red\PYZus{}cars}\PY{o}{.}\PY{n}{CAR\PYZus{}SEARCH\PYZus{}PRICE}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ageplt}\PY{o}{.}\PY{n}{add\PYZus{}legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Sakher\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}core\textbackslash{}generic.py:3643: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  self[name] = value
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Using the description above, we calculate the new score for each car of
+a specific request, the new features added to our data are the
+following:
+
+CAR\_SCORE : represents the score using our model, higher score means
+higher rank.
+
+CAR\_RANK: cars are sorted based on the score we previously calculated,
+it follows the same CAR\_POSITION\_IN\_SEARCH ranking system
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{scores\PYZus{}df} \PY{o}{=} \PY{n}{get\PYZus{}score}\PY{p}{(}\PY{n}{request\PYZus{}id}\PY{p}{,} \PY{n}{cars\PYZus{}full\PYZus{}data}\PY{p}{,} \PY{n}{request\PYZus{}full\PYZus{}data}\PY{p}{)}
+         \PY{n}{scores\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CAR\PYZus{}RANK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{scores\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CAR\PYZus{}SCORE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{df\PYZus{}with\PYZus{}scores} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{red\PYZus{}cars}\PY{p}{,} \PY{n}{scores\PYZus{}df}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}with\PYZus{}scores}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CAR\PYZus{}SCORE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}                   SEARCH\_REQUEST\_ID                            CAR\_ID  \textbackslash{}
+         5  d3e6547a4eb9db6bb8939e922c3e8fb7  12e213feba1746435bc5bbcbdc49d7a8   
+         2  d3e6547a4eb9db6bb8939e922c3e8fb7  c27faba880257517dfbb1245ea6a20df   
+         6  d3e6547a4eb9db6bb8939e922c3e8fb7  51183df7aa54758e668f786ebad5ad7c   
+         1  d3e6547a4eb9db6bb8939e922c3e8fb7  235680dd19c9ec7027e5b38d691421cb   
+         3  d3e6547a4eb9db6bb8939e922c3e8fb7  2bf3bbef0b8c6dea16ba885722bc42e3   
+         0  d3e6547a4eb9db6bb8939e922c3e8fb7  81e2fc073cf49e74242cec3aca0b6b2a   
+         4  d3e6547a4eb9db6bb8939e922c3e8fb7  09887f5a912217c0712cd1bfb58fc80c   
+         
+                 CAR\_MODEL CAR\_BRAND  CAR\_CATEGORY  CAR\_RELEASE\_YEAR  \textbackslash{}
+         5    CLIO SOCIÉTÉ   RENAULT             1              2013   
+         2    CLIO SOCIÉTÉ   RENAULT             1              2015   
+         6  KANGOO EXPRESS   RENAULT             1              2012   
+         1            NEMO   CITROEN             2              2011   
+         3  KANGOO EXPRESS   RENAULT             1              2012   
+         0            NEMO   CITROEN             2              2011   
+         4     208 SOCIÉTÉ   PEUGEOT             1              2015   
+         
+            CAR\_PRICE\_EXTRA\_KM  CAR\_IS\_OPEN  CAR\_INSTANT\_BOOKABLE CAR\_OWNER\_PRR  \textbackslash{}
+         5                0.15         True                  True          0.84   
+         2                0.15         True                  True             1   
+         6                0.15         True                  True             1   
+         1                0.18         True                  True             1   
+         3                0.15         True                  True           0.8   
+         0                0.18         True                  True             1   
+         4                0.15         True                  True           0.5   
+         
+           CAR\_OWNER\_MATCHES\_COUNT  CAR\_DISTANCE\_TO\_SEARCH\_ADDRESS  CAR\_SEARCH\_PRICE  \textbackslash{}
+         5                      19                          7.7495                38   
+         2                      84                          8.5319                42   
+         6                      10                          9.4262                40   
+         1                     125                         10.5716                37   
+         3                     165                         11.2556                41   
+         0                      43                          7.3343                44   
+         4                       0                          6.9882                45   
+         
+            CAR\_POSITION\_IN\_SEARCH  CAR\_SCORE  CAR\_RANK  
+         5                       3   0.207190       0.0  
+         2                       6   0.198718       1.0  
+         6                       1   0.191057       2.0  
+         1                       2   0.129788       3.0  
+         3                       4   0.119973       4.0  
+         0                       0   0.105353       5.0  
+         4                       5   0.096362       6.0  
+\end{Verbatim}
+            
+    Critics and future ideas
+
+ \#\#\#\# Critics The challenge with working on this particular scoring
+model, is that there isn't a ground truth model upon which we can
+evaluate our results. The scoring model proposed has some flaws which
+are:
+
+Considering that features are independant. For example, based on the
+correlation graph, \$cov(car\_is\_open, car\_instant\_bookable) =
+0.870173 \$ which means that these features are highly corelated.
+Correlation and causality should be checked before calculating the
+probabilty.
+
+Weights \(w_i\) are chosen based on a small survey, these value can bias
+the scoring model and should be reconsidered
+
+\hypertarget{future-ideas}{%
+\paragraph{Future ideas}\label{future-ideas}}
+
+Create user profiles where each profile is defined by a set of renting
+habbits, criterias importance (prince, distance\ldots{})
+
+Capture what the user is really looking for, based on his history or/and
+using the behaviour of it profiling data
+
+Create a score of each car model, to try to propose cars that are highly
+demanded
+
+Utilize cars ratings, and use NLP methods on user's feedback to improve
+the rating
+
+Create a score on car owners and prioritize well rated owners
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
